@@ -33,7 +33,7 @@ export default {
           icon: 'home'
         },
         {
-          link: '',
+          link: '/users/',
           title: 'ユーザー管理',
           icon: 'account_circle'
         },
