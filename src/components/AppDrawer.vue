@@ -19,3 +19,9 @@ export default {
   props: ['link', 'title', 'icon']
 }
 </script>
+
+<style lang="scss" scoped>
+i.v-icon.material-icons.theme--light {
+  color: #d64113;
+}
+</style>

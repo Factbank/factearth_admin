@@ -1,87 +1,57 @@
 <template>
-  <v-flex >
-    <v-card>
-      <v-list two-line>
-        <v-subheader>通報されたユーザー</v-subheader>
-        <template v-for="(item, index) in items">
-          <v-list-tile
-            :key="item.title"
-            avatar
-            ripple
-            @click="toggle(index)"
-          >
-            <v-list-tile-content>
-              <v-list-tile-title>{{ item.title }}</v-list-tile-title>
-              <v-list-tile-sub-title class="text--primary">{{ item.headline }}</v-list-tile-sub-title>
-              <v-list-tile-sub-title>{{ item.subtitle }}</v-list-tile-sub-title>
-            </v-list-tile-content>
-
-            <v-list-tile-action>
-              <v-list-tile-action-text>{{ item.action }}</v-list-tile-action-text>
-              <v-icon
-                v-if="selected.indexOf(index) < 0"
-                color="grey lighten-1"
-              >
-                star_border
-              </v-icon>
-
-              <v-icon
-                v-else
-                color="yellow darken-2"
-              >
-                star
-              </v-icon>
-            </v-list-tile-action>
-          </v-list-tile>
-          <v-divider
-            v-if="index + 1 < items.length"
-            :key="index"
-          ></v-divider>
-        </template>
-      </v-list>
-    </v-card>
-  </v-flex>
-  
+  <v-data-table
+    :headers="headers"
+    :items="users"
+    hide-actions
+    class="elevation-1"
+  >
+    <template slot="items" slot-scope="props">
+      <td>{{ props.item.name }}</td>
+      <td class="text-xs-right">{{ props.item.email }}</td>
+      <td class="text-xs-right">{{ props.item.logins }}</td>
+      <td class="text-xs-right">{{ props.item.reports }}</td>
+      <td class="text-xs-right"><v-btn color="info">ユーザーページ</v-btn><v-btn color="error">アカウント無効化</v-btn></td>
+    </template>
+  </v-data-table>
 </template>
 
 <script>
 export default {
   data() {
     return {
-      selected: [2],
-      items: [
+      headers: [
         {
-          action: '15 min',
-          headline: 'Brunch this weekend?',
-          title: 'Ali Connors',
-          subtitle:
-            "I'll be in your neighborhood doing errands this weekend. Do you want to hang out?"
+          text: 'Name',
+          align: 'left',
+          sortable: false,
+          value: 'Name'
+        },
+        { text: 'Email', value: 'email' },
+        { text: 'login count', value: 'logins' },
+        { text: '通報回数', value: 'reports' },
+        { text: 'アクション', value: 'action' }
+      ],
+      users: [
+        {
+          value: false,
+          name: 'Frozen Yogurt',
+          email: 6.0,
+          logins: 24,
+          reports: 4.0
         },
         {
-          action: '2 hr',
-          headline: 'Summer BBQ',
-          title: 'me, Scrott, Jennifer',
-          subtitle: "Wish I could come, but I'm out of town this weekend."
+          value: false,
+          name: 'Ice cream sandwich',
+          email: 9.0,
+          logins: 37,
+          reports: 4.3
         },
         {
-          action: '6 hr',
-          headline: 'Oui oui',
-          title: 'Sandra Adams',
-          subtitle: 'Do you have Paris recommendations? Have you ever been?'
-        },
-        {
-          action: '12 hr',
-          headline: 'Birthday gift',
-          title: 'Trevor Hansen',
-          subtitle:
-            'Have any ideas about what we should get Heidi for her birthday?'
-        },
-        {
-          action: '18hr',
-          headline: 'Recipe to try',
-          title: 'Britta Holt',
-          subtitle:
-            'We should eat this: Grate, Squash, Corn, and tomatillo Tacos.'
+          value: false,
+          name: 'Eclair',
+          email: 16.0,
+          logins: 23,
+          reports: 6.0
         }
       ]
     }
@@ -89,5 +59,9 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss" scoped>
+.layout {
+  display: inline-block;
+  width: 100%;
+}
 </style>

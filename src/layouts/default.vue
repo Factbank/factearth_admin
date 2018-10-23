@@ -2,12 +2,12 @@
   <v-app>
     <v-navigation-drawer app v-model='isDrawerOpen'>
       <v-list dense>
-        <App-drawer v-for="(drawer, key) in drawerList" :key="key" :title="drawer.title" :icon="drawer.icon" :link="drawer.link"></App-drawer>
+        <App-drawer v-for="(drawer, key) in drawerList" :key="key" :title="drawer.title" :icon="drawer.icon" :link="drawer.link"><v-divider/></App-drawer>
       </v-list>
     </v-navigation-drawer>
     <v-toolbar color="#D64113" dark fixed app>
       <v-toolbar-side-icon @click.stop="isDrawerOpen = !isDrawerOpen"></v-toolbar-side-icon>
-      <v-toolbar-title>Factearth Admin</v-toolbar-title>
+      <v-toolbar-title><router-link to='/'>Factearth Admin</router-link></v-toolbar-title>
     </v-toolbar>
     <v-content>
       <v-container fluid fill-height>
@@ -58,3 +58,10 @@ export default {
   components: { AppDrawer }
 }
 </script>
+
+<style>
+a.router-link-active {
+  color: #fff;
+  text-decoration: none;
+}
+</style>
